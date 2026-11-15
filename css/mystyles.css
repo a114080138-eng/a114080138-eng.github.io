@@ -1,0 +1,276 @@
+/*
+ * 第九週：個人履歷網站客製化樣式
+ * 色彩主題：卡其色 × 白色
+ * 只覆蓋個人外觀，不修改原始 styles.css。
+ */
+
+/* 1. 主題色票 */
+:root {
+    --resume-khaki: #A68A64;
+    --resume-khaki-dark: #806B4F;
+    --resume-khaki-light: #F3EFE7;
+    --resume-white: #FFFFFF;
+    --resume-text: #403A32;
+    --resume-muted: #746B60;
+    --resume-border: #E7DED1;
+}
+
+/* 2. 全站字體與文字大小寫 */
+html {
+    scroll-behavior: smooth;
+}
+
+body,
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+.subheading {
+    font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+}
+
+body {
+    color: var(--resume-text);
+}
+
+h1, h2, h3, h4, h5, h6,
+.subheading {
+    text-transform: none;
+}
+
+h1, h2, h3 {
+    color: var(--resume-khaki-dark);
+}
+
+/* 3. Bootstrap / Start Bootstrap 主題色覆蓋
+   同時處理 Bootstrap 4 的實際元件選擇器與模板色彩類別。 */
+.bg-primary,
+#sideNav {
+    background-color: var(--resume-khaki) !important;
+}
+
+.text-primary {
+    color: var(--resume-khaki-dark) !important;
+}
+
+a {
+    color: var(--resume-khaki-dark);
+}
+
+a:hover,
+a:focus {
+    color: var(--resume-khaki);
+}
+
+.btn-primary,
+.btn-primary:focus {
+    color: var(--resume-white);
+    background-color: var(--resume-khaki);
+    border-color: var(--resume-khaki);
+}
+
+.btn-primary:hover,
+.btn-primary:active {
+    color: var(--resume-white);
+    background-color: var(--resume-khaki-dark);
+    border-color: var(--resume-khaki-dark);
+}
+
+/* 4. 左側導覽列 */
+#sideNav {
+    background-image: none !important;
+}
+
+#sideNav .navbar-brand,
+#sideNav .navbar-nav .nav-link {
+    color: var(--resume-white);
+}
+
+#sideNav .navbar-nav .nav-link {
+    transition: color .2s ease, opacity .2s ease;
+    letter-spacing: .04em;
+}
+
+#sideNav .navbar-nav .nav-link:hover,
+#sideNav .navbar-nav .nav-link:focus,
+#sideNav .navbar-nav .nav-link.active {
+    color: var(--resume-white);
+    opacity: .72;
+}
+
+#sideNav .navbar-toggler {
+    border-color: rgba(255, 255, 255, .55);
+}
+
+/* 5. 社群圖示按鈕與滑鼠移入效果 */
+.social-icons .social-icon {
+    background-color: var(--resume-khaki);
+    color: var(--resume-white);
+    transition: background-color .2s ease, transform .2s ease;
+}
+
+.social-icons .social-icon:hover,
+.social-icons .social-icon:focus {
+    background-color: var(--resume-khaki-dark);
+    color: var(--resume-white);
+    transform: translateY(-2px);
+}
+
+/* 6. 履歷各區塊：白色與淺卡其交錯 */
+.resume-section {
+    background-color: var(--resume-white);
+}
+
+#about,
+#experience,
+#interests {
+    background-color: var(--resume-white);
+}
+
+#education,
+#skills,
+#goals,
+#portfolio {
+    background-color: var(--resume-khaki-light);
+}
+
+.resume-section hr,
+hr.m-0 {
+    border-color: var(--resume-border);
+}
+
+/* 區塊內文與日期 */
+.resume-section p {
+    color: var(--resume-text);
+    line-height: 1.9;
+}
+
+.experience-date {
+    color: var(--resume-khaki-dark);
+}
+
+/* 7. 作品集標題 */
+#portfolio .portfolio-heading {
+    margin-bottom: 2rem;
+}
+
+#portfolio .portfolio-eyebrow,
+#portfolio .portfolio-category {
+    color: var(--resume-khaki-dark);
+    letter-spacing: .12em;
+    font-size: .78rem;
+    font-weight: 700;
+}
+
+#portfolio .portfolio-intro {
+    color: var(--resume-muted);
+    max-width: 720px;
+}
+
+/* 8. Bento Grid 便當盒作品卡片 */
+#portfolio .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+    align-items: stretch;
+}
+
+#portfolio .bento-item {
+    min-width: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: var(--resume-white);
+    border: 1px solid var(--resume-border);
+    border-radius: 14px;
+    padding: 0;
+    box-shadow: 0 5px 18px rgba(64, 58, 50, .055);
+    transition: transform .22s ease, box-shadow .22s ease;
+}
+
+#portfolio .bento-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 26px rgba(64, 58, 50, .11);
+}
+
+#portfolio .bento-wide {
+    grid-column: span 2;
+}
+
+#portfolio .portfolio-image-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 230px;
+    overflow: hidden;
+    background-color: #F8F6F2;
+}
+
+#portfolio .portfolio-image-link img {
+    display: block;
+    width: 100%;
+    height: 260px;
+    object-fit: contain;
+    object-position: center;
+    transition: transform .3s ease;
+}
+
+#portfolio .bento-item:hover .portfolio-image-link img {
+    transform: scale(1.025);
+}
+
+#portfolio .portfolio-card-featured .portfolio-image-link img {
+    height: 360px;
+}
+
+#portfolio .portfolio-card-body {
+    flex: 1;
+    padding: 22px 24px 24px;
+}
+
+#portfolio .portfolio-card-body h3 {
+    margin-top: .55rem;
+    margin-bottom: .65rem;
+    color: var(--resume-khaki-dark);
+    font-size: 1.25rem;
+    line-height: 1.5;
+}
+
+#portfolio .portfolio-card-body p {
+    margin-bottom: 0;
+    color: var(--resume-muted);
+    line-height: 1.8;
+}
+
+/* 9. 平板與手機：自動改為單欄，圖片不裁切 */
+@media (max-width: 767.98px) {
+    #portfolio .bento-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 18px;
+    }
+
+    #portfolio .bento-wide {
+        grid-column: span 1;
+    }
+
+    #portfolio .portfolio-image-link img,
+    #portfolio .portfolio-card-featured .portfolio-image-link img {
+        height: auto;
+        max-height: 360px;
+    }
+
+    #portfolio .portfolio-card-body {
+        padding: 18px 20px 20px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    #portfolio .bento-item,
+    #portfolio .portfolio-image-link img,
+    .social-icons .social-icon {
+        transition: none;
+    }
+}
