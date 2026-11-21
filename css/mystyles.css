@@ -1,7 +1,7 @@
 /*
  * 第九週：個人履歷網站客製化樣式
  * 色彩主題：卡其色 × 白色
- * 只覆蓋個人外觀，不修改原始 styles.css。
+ * Bento Grid 加強版：保留原本 HTML、文字、圖片與色彩設定。
  */
 
 /* 1. 主題色票 */
@@ -15,7 +15,7 @@
     --resume-border: #E7DED1;
 }
 
-/* 2. 全站字體與文字大小寫 */
+/* 2. 全站字體與基本設定 */
 html {
     scroll-behavior: smooth;
 }
@@ -40,8 +40,7 @@ h1, h2, h3 {
     color: var(--resume-khaki-dark);
 }
 
-/* 3. Bootstrap / Start Bootstrap 主題色覆蓋
-   同時處理 Bootstrap 4 的實際元件選擇器與模板色彩類別。 */
+/* 3. Bootstrap / Start Bootstrap 主題色覆蓋 */
 .bg-primary,
 #sideNav {
     background-color: var(--resume-khaki) !important;
@@ -100,7 +99,7 @@ a:focus {
     border-color: rgba(255, 255, 255, .55);
 }
 
-/* 5. 社群圖示按鈕與滑鼠移入效果 */
+/* 5. 社群圖示按鈕 */
 .social-icons .social-icon {
     background-color: var(--resume-khaki);
     color: var(--resume-white);
@@ -114,7 +113,7 @@ a:focus {
     transform: translateY(-2px);
 }
 
-/* 6. 履歷各區塊：白色與淺卡其交錯 */
+/* 6. 履歷區塊背景 */
 .resume-section {
     background-color: var(--resume-white);
 }
@@ -132,12 +131,10 @@ a:focus {
     background-color: var(--resume-khaki-light);
 }
 
-.resume-section hr,
 hr.m-0 {
     border-color: var(--resume-border);
 }
 
-/* 區塊內文與日期 */
 .resume-section p {
     color: var(--resume-text);
     line-height: 1.9;
@@ -149,52 +146,86 @@ hr.m-0 {
 
 /* 7. 作品集標題 */
 #portfolio .portfolio-heading {
-    margin-bottom: 2rem;
+    margin-bottom: 2.4rem;
 }
 
 #portfolio .portfolio-eyebrow,
 #portfolio .portfolio-category {
     color: var(--resume-khaki-dark);
     letter-spacing: .12em;
-    font-size: .78rem;
+    font-size: .76rem;
     font-weight: 700;
 }
 
-#portfolio .portfolio-intro {
-    color: var(--resume-muted);
-    max-width: 720px;
+#portfolio .portfolio-eyebrow {
+    display: inline-block;
+    margin-bottom: .65rem;
 }
 
-/* 8. Bento Grid 便當盒作品卡片 */
+#portfolio .portfolio-heading h2 {
+    letter-spacing: .015em;
+}
+
+#portfolio .portfolio-heading h2 span {
+    display: inline-block;
+    margin-left: .35rem;
+    color: var(--resume-khaki);
+    font-size: .58em;
+    font-weight: 500;
+}
+
+#portfolio .portfolio-intro {
+    max-width: 720px;
+    margin-top: .8rem;
+    color: var(--resume-muted);
+}
+
+/* 8. 不對稱 Bento Grid：利用 12 欄建立不同卡片比例 */
 #portfolio .bento-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(12, minmax(0, 1fr));
     gap: 22px;
     align-items: stretch;
 }
 
 #portfolio .bento-item {
+    grid-column: span 6;
     min-width: 0;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    padding: 0;
     background: var(--resume-white);
     border: 1px solid var(--resume-border);
-    border-radius: 14px;
-    padding: 0;
+    border-radius: 16px;
     box-shadow: 0 5px 18px rgba(64, 58, 50, .055);
     transition: transform .22s ease, box-shadow .22s ease;
 }
 
 #portfolio .bento-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 26px rgba(64, 58, 50, .11);
+    transform: translateY(-5px);
+    box-shadow: 0 14px 30px rgba(64, 58, 50, .12);
 }
 
-#portfolio .bento-wide {
-    grid-column: span 2;
+/* 第一、四件作品較寬；第二、三件作品較窄 */
+#portfolio .bento-item:nth-child(1),
+#portfolio .bento-item:nth-child(4) {
+    grid-column: span 7;
 }
 
+#portfolio .bento-item:nth-child(2),
+#portfolio .bento-item:nth-child(3) {
+    grid-column: span 5;
+}
+
+/* 第五、六件作品形成三欄節奏 */
+#portfolio .bento-item:nth-child(5),
+#portfolio .bento-item:nth-child(6),
+#portfolio .bento-item:nth-child(7) {
+    grid-column: span 4;
+}
+
+/* 圖片區 */
 #portfolio .portfolio-image-link {
     display: flex;
     align-items: center;
@@ -208,30 +239,43 @@ hr.m-0 {
 #portfolio .portfolio-image-link img {
     display: block;
     width: 100%;
-    height: 260px;
+    height: 270px;
     object-fit: contain;
     object-position: center;
-    transition: transform .3s ease;
+    transition: transform .35s ease;
 }
 
 #portfolio .bento-item:hover .portfolio-image-link img {
-    transform: scale(1.025);
+    transform: scale(1.035);
 }
 
-#portfolio .portfolio-card-featured .portfolio-image-link img {
-    height: 360px;
+/* 不同卡片的圖片高度，增加版面節奏 */
+#portfolio .bento-item:nth-child(1) .portfolio-image-link img,
+#portfolio .bento-item:nth-child(4) .portfolio-image-link img {
+    height: 310px;
 }
 
+#portfolio .bento-item:nth-child(2) .portfolio-image-link img,
+#portfolio .bento-item:nth-child(3) .portfolio-image-link img {
+    height: 250px;
+}
+
+#portfolio .bento-item:nth-child(5) .portfolio-image-link img,
+#portfolio .bento-item:nth-child(6) .portfolio-image-link img {
+    height: 225px;
+}
+
+/* 文字內容 */
 #portfolio .portfolio-card-body {
     flex: 1;
-    padding: 22px 24px 24px;
+    padding: 21px 23px 24px;
 }
 
 #portfolio .portfolio-card-body h3 {
     margin-top: .55rem;
     margin-bottom: .65rem;
     color: var(--resume-khaki-dark);
-    font-size: 1.25rem;
+    font-size: 1.22rem;
     line-height: 1.5;
 }
 
@@ -239,30 +283,113 @@ hr.m-0 {
     margin-bottom: 0;
     color: var(--resume-muted);
     line-height: 1.8;
+    font-size: .96rem;
 }
 
-/* 9. 平板與手機：自動改為單欄，圖片不裁切 */
+/* 最後一件作品作為橫向主視覺 */
+#portfolio .portfolio-card-featured.bento-wide {
+    grid-column: span 12;
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(260px, .8fr);
+    align-items: stretch;
+}
+
+#portfolio .portfolio-card-featured .portfolio-image-link {
+    min-height: 300px;
+}
+
+#portfolio .portfolio-card-featured .portfolio-image-link img {
+    height: 360px;
+}
+
+#portfolio .portfolio-card-featured .portfolio-card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 34px;
+}
+
+/* 9. 平板：兩欄排列 */
+@media (max-width: 991.98px) {
+    #portfolio .bento-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+    #portfolio .bento-item,
+    #portfolio .bento-item:nth-child(1),
+    #portfolio .bento-item:nth-child(2),
+    #portfolio .bento-item:nth-child(3),
+    #portfolio .bento-item:nth-child(4),
+    #portfolio .bento-item:nth-child(5),
+    #portfolio .bento-item:nth-child(6),
+    #portfolio .bento-item:nth-child(7) {
+        grid-column: span 1;
+    }
+
+    #portfolio .portfolio-card-featured.bento-wide {
+        grid-column: span 2;
+    }
+
+    #portfolio .portfolio-card-featured.bento-wide {
+        grid-template-columns: minmax(0, 1.2fr) minmax(220px, .8fr);
+    }
+}
+
+/* 10. 手機：單欄排列，圖片完整呈現 */
 @media (max-width: 767.98px) {
     #portfolio .bento-grid {
         grid-template-columns: minmax(0, 1fr);
         gap: 18px;
     }
 
-    #portfolio .bento-wide {
+    #portfolio .bento-item,
+    #portfolio .bento-item:nth-child(1),
+    #portfolio .bento-item:nth-child(2),
+    #portfolio .bento-item:nth-child(3),
+    #portfolio .bento-item:nth-child(4),
+    #portfolio .bento-item:nth-child(5),
+    #portfolio .bento-item:nth-child(6),
+    #portfolio .bento-item:nth-child(7),
+    #portfolio .portfolio-card-featured.bento-wide {
         grid-column: span 1;
     }
 
-    #portfolio .portfolio-image-link img,
-    #portfolio .portfolio-card-featured .portfolio-image-link img {
-        height: auto;
-        max-height: 360px;
+    #portfolio .portfolio-card-featured.bento-wide {
+        display: flex;
+        flex-direction: column;
     }
 
-    #portfolio .portfolio-card-body {
-        padding: 18px 20px 20px;
+    #portfolio .portfolio-image-link {
+        min-height: 0;
+    }
+
+    #portfolio .portfolio-image-link img,
+    #portfolio .bento-item:nth-child(1) .portfolio-image-link img,
+    #portfolio .bento-item:nth-child(2) .portfolio-image-link img,
+    #portfolio .bento-item:nth-child(3) .portfolio-image-link img,
+    #portfolio .bento-item:nth-child(4) .portfolio-image-link img,
+    #portfolio .bento-item:nth-child(5) .portfolio-image-link img,
+    #portfolio .bento-item:nth-child(6) .portfolio-image-link img,
+    #portfolio .bento-item:nth-child(7) .portfolio-image-link img,
+    #portfolio .portfolio-card-featured .portfolio-image-link img {
+        width: 100%;
+        height: auto;
+        max-height: 380px;
+    }
+
+    #portfolio .portfolio-card-body,
+    #portfolio .portfolio-card-featured .portfolio-card-body {
+        padding: 19px 20px 21px;
+    }
+
+    #portfolio .portfolio-heading h2 span {
+        display: block;
+        margin: .35rem 0 0;
     }
 }
 
+/* 11. 尊重使用者的減少動態效果設定 */
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
